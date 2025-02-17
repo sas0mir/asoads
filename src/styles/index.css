@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 255, 85, 0.3) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 4px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer utilities {
+  .animation-paused {
+    animation-play-state: paused;
+  }
+  .animation-running {
+    animation-play-state: running;
+  }
+}
+
+@keyframes fadeOutBlink {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  40% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0.5;
+  }
+  80% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.header {
+  /* width: calc(100% - 40px) !important;
+  max-width: 1867px !important;
+  transform: scale(calc(min(1, 0.7 + 0.3 * (100vw / 1867)))) !important;
+  transform-origin: top center !important;
+  transition: transform 0.3s ease !important;
+  background-color: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 20.67%, rgba(255, 255, 255, 0) 84.22%) !important;
+  overflow: hidden !important; */
+  position: -webkit-sticky !important;
+}
+
+.animate-fade-out {
+  animation: fadeOutBlink 3s ease-out forwards;
+}
+
+.underlineCust {
+  position: relative;
+}
+.underlineCust2 {
+  position: relative;
+}
+
+.underlineCust::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: -15px;
+  width: calc(100% + 160px);
+  height: 2px;
+  background: linear-gradient(90deg, #000000 0%, #808080 70%, #bbbbbb 85%, #ffffff 100%);
+}
+
+.underlineCust2::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: -140px;
+  width: calc(100% + 160px);
+  height: 2px;
+  background: linear-gradient(90deg, #ffffff 0%, #bbbbbb 15%, #808080 30%, #000000 100%);
+}
+
+html,
+body {
+  touch-action: none !important;
+}
+
+.safari {
+  will-change: transform, opacity !important;
+  contain: none !important;
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+  perspective: 1000px !important; 
+}
+
+.blockWorckingUs {
+  background: linear-gradient(92.86deg, #6f00ff 0%, #ff3d00 100%) !important;
+  filter: blur(20px) !important;
+  z-index: -1 !important;
+}
+
+@media (max-width: 1920px) {
+  h2 {
+    font-size: clamp(16px, 2.28vw, 50px) !important;
+    letter-spacing: normal !important;
+  }
+}
+
+@media (max-width: 1500px) {
+  /* .header {
+    width: calc(100% - 35px) !important;
+  } */
+}
+
+@media (max-width: 1100px) {
+  /* .header {
+    width: calc(100% - 25px) !important;
+  } */
+  .underlineCust::after {
+    width: calc(100% + 50px);
+  }
+  .underlineCust2::after {
+    width: calc(100% + 50px);
+    left: -40px;
+  }
+  .blockWorckingUs {
+    background: linear-gradient(92.86deg, #6f00ff 0%, #ff3d00 100%) !important;
+    filter: blur(7px) !important;
+    z-index: -1 !important;
+  }
+}
+
+@media (max-width: 600px) {
+  /* .header {
+    width: calc(100% - 10px) !important;
+  } */
+  .blockWorckingUs {
+    background: linear-gradient(92.86deg, #6f00ff 0%, #ff3d00 100%) !important;
+    filter: blur(3px) !important;
+    z-index: -1 !important;
+  }
+}
+
+@media (max-width: 530px) {
+  .arrow1 {
+    position: absolute;
+    right: 148px;
+  }
+  
+  .arrow2 {
+    position: absolute;
+    left: 140px;
+  }
+}
+
+@media (max-width: 600px) {
+  .arrow1 {
+    position: absolute;
+    right: 118px;
+  }
+  
+  .arrow2 {
+    position: absolute;
+    left: 120px;
+  }
+}
+
+@media (max-width: 470px) {
+  .arrow1 {
+    position: absolute;
+    right: 90px;
+  }
+  
+  .arrow2 {
+    position: absolute;
+    left: 100px;
+  }
+}
+
+@media (max-width: 415px) {
+  .arrow1 {
+    position: absolute;
+    right: 65px;
+  }
+  
+  .arrow2 {
+    position: absolute;
+    left: 85px;
+  }
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
