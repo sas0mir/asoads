@@ -5,7 +5,8 @@ import { useInView } from 'react-intersection-observer';
 interface AnimProps { 
   className?: string; 
   anim: string; 
-  render?: 'canvas' | 'svg' | 'html'; 
+  render?: 'canvas' | 'svg' | 'html';
+  loading?: string 
 } 
  
 const Anim: React.FC<AnimProps> = ({ className = '', anim, render = 'canvas' }) => { 

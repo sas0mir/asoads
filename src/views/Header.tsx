@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import BtnLnChange from '../components/header/BtnLnChange'
 import BtnRegLog from '../components/header/BtnRegLog'
 
@@ -13,11 +13,26 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isScrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setScrolled(!entry.isIntersecting)
+      },
+      { threshold: 0.1 }
+    );
+    const scrollHelper = document.getElementById('scrollHelper')
+    if (scrollHelper) {
+      observer.observe(scrollHelper);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
-
   return (
     <header
       className={`header top-0 bg-headerGradient z-[999] h-[146px] sticky max-w-[1867px]
@@ -29,7 +44,7 @@ const Header: React.FC<HeaderProps> = (props) => {
         <div className="flex-1 600px:block hidden">
           <BtnLnChange />
         </div>
-        <div className="1500px:max-w-[250px] 1100px:max-w-[212px] 600px:max-w-[182px] max-w-[110px]">
+        <div className={`transition-all duration-500 ease-in-out ${isScrolled ? 'max-w-[160px]' : '1500px:max-w-[250px] 1100px:max-w-[212px] 600px:max-w-[182px] max-w-[110px]'}`}>
           <img src={logo} alt="logo" />
         </div>
         <div className="600px:flex hidden justify-end flex-1">

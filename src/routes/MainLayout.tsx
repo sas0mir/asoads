@@ -26,6 +26,8 @@ const MainLayout: React.FC<MainLayoutProps> = () => {
       <div className="flex flex-col items-center w-full bg-white 1100px:rounded-[20px] rounded-[10px] overflow-x-hidden scroll-smooth">
         <div className="flex flex-col items-center relative justify-center max-w-[1877px] w-full">
           <Header />
+          {/* неидимый див который активирует изменение хидера */}
+          <div id='scrollHelper' className='absolute top-[150px] h-0 w-full'></div>
           {/* {React.Children.map(children, (child, index) => (
             <div
               key={index}

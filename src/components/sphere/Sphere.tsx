@@ -39,17 +39,26 @@ const Sphere = () => {
 
   const rowOffsets = updateRowOffsets()
 
+  //группируем анимацию motion.div
+  const rowVariantsLeft = {
+    hidden: () => ({ opacity: 0, x: 0 }),
+    visible: (i: number) => ({ opacity: 1, x: -rowOffsets[i] }),
+  }
+  const rowVariantsRight = {
+    hidden: () => ({ opacity: 0, x: 0 }),
+    visible: (i: number) => ({ opacity: 1, x: rowOffsets[i] }),
+  }
+
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
+      setIsInView(entry.isIntersecting)
       if (entry.isIntersecting) {
         setScrollCount((prevCount) => prevCount + 1)
         setIsExiting(false)
-        setIsInView(true)
       } else {
         setIsExiting(true)
-        setIsInView(false)
       }
-    })
+    }, { threshold: 0.5 }) //срабатывание когда в поле видимости пол-элемента
 
     if (sphereRef.current) {
       observer.observe(sphereRef.current)
@@ -74,21 +83,21 @@ const Sphere = () => {
       className="relative 1100px:max-w-[735px] max-w-[400px] w-full 1500px:h-[735px] 1100px:h-[535px] 600px:h-[300px] h-[220px] mt-[100px]"
     >
       <div className="relative w-full h-full">
-        <Anim anim="anim/sphere.json" className="absolute top-0 left-0 w-full h-full z-30" render="svg" />
+        <Anim anim="anim/sphere.json" className="absolute top-0 left-0 w-full h-full z-30" render="svg" loading="lazy" />
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40">
           <div className="relative z-30 flex flex-col items-center">
             {/* Белый размазанный блок */}
             <span
               style={{
-                filter: 'blur(20px)',
-                WebkitFilter: 'blur(20px)',
-                transform: 'translate3d(0, 0, 0)'
+                // filter: 'blur(20px)',
+                // WebkitFilter: 'blur(20px)',
+                //transform: 'translate3d(0, 0, 0)'
               }}
-              className="absolute bottom-[-10px] opacity-[74%] rounded-full 
+              className="absolute bg-blurWhite bottom-[-10px] opacity-[74%] rounded-full 
              1500px:w-[423px] 1100px:w-[293px] w-[180px] 
              1500px:h-[100px] 1100px:h-[60px] h-[40px]"
             >
-              <span className="absolute inset-0 bg-white"></span>
+              <span className="absolute inset-0"></span>
             </span>
 
             {/* Текст сверху */}
@@ -118,6 +127,19 @@ const Sphere = () => {
                   <motion.div
                     key={`left-${rowIndex}`}
                     className="text-black font-bold 1100px:text-[30px] 600px:text-[16px] text-[12px] "
+                    initial="hidden"
+                    animate="visible"
+                    variants={rowVariantsLeft}
+                    custom={rowIndex}
+                    transition={{ duration: 2, delay: rowIndex * 0.5 }}
+                  >
+                    <span className="underlineCust">{row.left}</span>
+                  </motion.div>
+                ))}
+                {/* {rows.map((row, rowIndex) => (
+                  <motion.div
+                    key={`left-${rowIndex}`}
+                    className="text-black font-bold 1100px:text-[30px] 600px:text-[16px] text-[12px] "
                     initial={{ opacity: 0, x: 0 }}
                     animate={{ opacity: 1, x: -rowOffsets[rowIndex] }}
                     transition={{
@@ -128,7 +150,7 @@ const Sphere = () => {
                   >
                     <span className="underlineCust">{row.left}</span>
                   </motion.div>
-                ))}
+                ))} */}
               </motion.div>
               <motion.div
                 className="flex flex-col 1100px:gap-[62px] gap-[20px]"
@@ -143,17 +165,28 @@ const Sphere = () => {
                 {rows.map((row, rowIndex) => (
                   <motion.div
                     key={`right-${rowIndex}`}
-                    className="text-black font-bold 1100px:text-[30px] 600px:text-[16px] text-[12px] text-end"
-                    initial={{ opacity: 0, x: 0 }}
-                    animate={{ opacity: 1, x: rowOffsets[rowIndex] }}
-                    transition={{
-                      duration: 2,
-                      fillMode: 'forwards',
-                      delay: 0
-                    }}
+                    className="text-black font-bold 1100px:text-[30px] 600px:text-[16px] text-[12px] text-end "
+                    initial="hidden"
+                    animate="visible"
+                    variants={rowVariantsRight}
+                    custom={rowIndex}
+                    transition={{ duration: 2, delay: rowIndex * 0.5 }}
                   >
                     <span className="underlineCust2">{row.right}</span>
                   </motion.div>
+                  // <motion.div
+                  //   key={`right-${rowIndex}`}
+                  //   className="text-black font-bold 1100px:text-[30px] 600px:text-[16px] text-[12px] text-end"
+                  //   initial={{ opacity: 0, x: 0 }}
+                  //   animate={{ opacity: 1, x: rowOffsets[rowIndex] }}
+                  //   transition={{
+                  //     duration: 2,
+                  //     fillMode: 'forwards',
+                  //     delay: 0
+                  //   }}
+                  // >
+                  //   <span className="underlineCust2">{row.right}</span>
+                  // </motion.div>
                 ))}
               </motion.div>
             </div>
