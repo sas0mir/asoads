@@ -83,7 +83,7 @@ const Sphere = () => {
       className="relative 1100px:max-w-[735px] max-w-[400px] w-full 1500px:h-[735px] 1100px:h-[535px] 600px:h-[300px] h-[220px] mt-[100px]"
     >
       <div className="relative w-full h-full">
-        <Anim anim="anim/sphere.json" className="absolute top-0 left-0 w-full h-full z-30" render="svg" loading="lazy" />
+        <Anim anim="anim/sphere.json" className="absolute top-0 left-0 w-full h-full z-30" render="svg" />
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40">
           <div className="relative z-30 flex flex-col items-center">
             {/* Белый размазанный блок */}

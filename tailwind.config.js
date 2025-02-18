@@ -28,7 +28,7 @@ export default {
         b3: '#b3b3b3'
       },
       backgroundImage: {
-        headerGradient: ' linear-gradient(180deg, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0) 90%)',
+        headerGradient: ' linear-gradient(180deg, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0) 90%)',
         blurWhite: 'radial-gradient(ellipse, rgba(255,255,255,0.74) 30%, transparent 70%)',
         bgDark: 'radial-gradient(37.68% 37.68% at 50% 50%, #843F10 0%, #EDE7E7 100%)',
         bgBtn: 'linear-gradient(264.64deg, #FE6302 -6.54%, #ED918A 42.73%, #B257AC 67.36%, #714CD0 91.99%)'
